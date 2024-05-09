@@ -7,7 +7,7 @@ authors:
     affiliation: Princeeton University
     email: sag2212@columbia.edu
 abstract: |
-  This article provides a personal epistemology of meta-analysis, an article-length answer to the question of what are we doing when we do meta-analysis
+  This article provides a personal epistemology of meta-analysis, an article-length answer to the question of what are we doing when we do meta-analysis...
 keywords:
   - meta-analysis
   - meta-science
@@ -16,5 +16,18 @@ biblio-style: unsrt
 output: rticles::arxiv_article
 ---
 
-# Introduction 
-What purposes do meta-analyses serve above and beyond those accomplished by systematic reviews? 
+# Introduction
+
+What are meta-analyses for, and what does a "meta-analytic estimate" actually mean? I have now contributed to four meta-analyses, and I've come to think that these questions are under-theorized by those of us who try our hand at it. Part of the problem is that the surface purpose and meaning of meta-analysis have a kind of pacifying effect to them: amalgamating results from many studies produces unified estimates that are more precise, and more externally valid, than any individual paper could hope to produce. Empirical research is inevitably messy and noisy, but a meta-analysis abstracts that all away and says: the answer, the true population-level average treatment effect (ATE), is d = (whatever).
+
+There is an intuitive logic here. If a study with one set of characteristics (e.g. perfect randomization and a small sample size) finds roughly the same effects as one with a totally different set (e.g. large samples and perfect treatment compliance but a dependent variable with an unknown relationship to the true quantity of interest), that lends credence to the idea that whatever effect you observe really is the true parameter, and not an artifact of an idiosyncratic feature of a particular study. If you *do* find systematic differences in your data, for instance, that one theoretical approach consistently outperforms another or that treatment is most effective in some setting, then that becomes your headline finding. If your evidence is strong enough, you can declare the paper's central questions effectively settled and point the next generation of researchers towards exploring moderating conditions or theoretical extensions. You can wrap up a meta-analysis and say: this territory is mapped. Onto the next question.
+
+But lately I've begun to have doubts about this model of inquiry. They began germinating while I was working on meta-analytic papers last year, but really came to fruition when I read two recent, excellent, and critical papers about meta-analysis: @slough2023 and @simonsohn2022. Not every criticism registered, but the two that did — which I 'll call the "comprehensive" and "coherence" critiques — get to the heart of the enterprise, and to papers I've contributed to. They left me wondering if the meta-analytic estimates I've produced are "not even wrong" [@scheel2022] in the sense of not being meaningful at all.
+
+I think I've come up with reasonable and (I hope) novel responses to these critiques. Thinking them through turned out to be a fine jumping off point for articulating a "personal epistemology" of meta-analysis. What I think I'm doing when I do meta-analysis. This paper is an attempt to make something at least somewhat broadly applicable out of that.
+
+In a nutshell, when I do meta-analysis, I am searching for the space where a future experiment can be most useful, and in my experience, the answer is often a well-designed study aimed at rigorously assessing a subfield's most basic precepts.
+
+This is distinct, I believe, from systematic reviews in biomedical fields [@kleinstauber1996; @cumpston2019], which seem aimed mainly at telling medical doctors, publich health officials, and/or policymakers wheteher some procedure or intervention is worth doing. Another crucial difference is that such reviews are often situated as the final word on a subject,[^1] whereas I aim for my meta-analyses to just be one part of an evolving conversation, especially in light of concerns about 'temporal validity,' the idea that effects might attenuate or evolve as conditions evolve [@munger2023].
+
+[^1]: For example, after two Cochrane reviews on the anti-malarial effects of insecticide-treated bed nets [@gamble2006; @lengeler2004], the lead author of one review (Lengeler) told the charity evaluator GiveWell that "there have been no more RCTs with treated nets. There is a very strong consensus that it would not be ethical to do any more. I don't think any committee in the world would grant permission to do such a trial" [@givewell2018]. Ultimately, there were three additional trials and an additional COCHRANE review [@pryce2018]
