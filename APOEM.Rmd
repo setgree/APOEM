@@ -1,0 +1,20 @@
+---
+title: a Personal Epistemology of Meta-Analysis
+authors:
+  - name: Seth Green
+    thanks: 
+    department: Kahneman-Treisman Center
+    affiliation: Princeeton University
+    email: sag2212@columbia.edu
+abstract: |
+  This article provides a personal epistemology of meta-analysis, an article-length answer to the question of what are we doing when we do meta-analysis
+keywords:
+  - meta-analysis
+  - meta-science
+bibliography: apoem-refs.bib
+biblio-style: unsrt
+output: rticles::arxiv_article
+---
+
+# Introduction 
+What purposes do meta-analyses serve above and beyond those accomplished by systematic reviews? 
