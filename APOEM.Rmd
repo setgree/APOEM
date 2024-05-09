@@ -7,7 +7,7 @@ authors:
     affiliation: Princeeton University
     email: sag2212@columbia.edu
 abstract: |
-  This article provides a personal epistemology of meta-analysis, an article-length answer to the question of what are we doing when we do meta-analysis...
+  I answer two questions: what are we doing when we do meta-analysis, and what do meta-analytic estimates signify?  I first define two models of meta-analysis that I find informative, which I call the "all in" and "focused" models depending on how comprehensively a paper searches for and analyzes heterogeneous designs, interventions, and dependent variables. I then summarize two recent critiques: the "comprehensive" critique from @simonsohn2022 -- that meta-analyses which aim to assess all possible evidence are purposefully eliding meaningful quality differences and therefore producing estimates that are less informative than those we glean from a literature's best papers -- and the "coherence" critique from @slough2023 -- that for meta-analytic estimates to mean anything at all, the assemebled interventions need to be testing the same ideas and the assembled dependent variables need to be measuring the true quantity of interest in the same way. Next, I offer some possible defenses for the "all in" model of meta-analysis from these critiques revolving around careful, humble interpretation of parameters. I conclude with some open questions for meta-analysis stemming from the method's straddling the line between deductive, hypothesis-driven and inductive, observation-driven modes of inquiry, which makes, for example, hewing to a pre-analysis plan very challenging.
 keywords:
   - meta-analysis
   - meta-science
@@ -18,7 +18,9 @@ output: rticles::arxiv_article
 
 # Introduction
 
-What are meta-analyses for, and what does a "meta-analytic estimate" actually mean? I have now contributed to four meta-analyses, and I've come to think that these questions are under-theorized by those of us who try our hand at it. Part of the problem is that the surface purpose and meaning of meta-analysis have a kind of pacifying effect to them: amalgamating results from many studies produces unified estimates that are more precise, and more externally valid, than any individual paper could hope to produce. Empirical research is inevitably messy and noisy, but a meta-analysis abstracts that all away and says: the answer, the true population-level average treatment effect (ATE), is d = (whatever).
+## What are we doing when we do meta-analyses?
+
+What are meta-analyses for, and what does a "meta-analytic estimate" actually mean? I have now contributed to four meta-analyses, and I've come to think that these questions are under-theorized by those of us who try our hand at it. Part of the problem is that the surface purpose and meaning of meta-analysis have a kind of pacifying effect to them: amalgamating results from many studies produces unified estimates that are more precise, and more externally valid, than any individual paper could hope to produce. Empirical research is inevitably messy and noisy, but a meta-analysis abstracts that all away and says: the answer, the true population-level parameter, is d = (whatever).
 
 There is an intuitive logic here. If a study with one set of characteristics (e.g. perfect randomization and a small sample size) finds roughly the same effects as one with a totally different set (e.g. large samples and perfect treatment compliance but a dependent variable with an unknown relationship to the true quantity of interest), that lends credence to the idea that whatever effect you observe really is the true parameter, and not an artifact of an idiosyncratic feature of a particular study. If you *do* find systematic differences in your data, for instance, that one theoretical approach consistently outperforms another or that treatment is most effective in some setting, then that becomes your headline finding. If your evidence is strong enough, you can declare the paper's central questions effectively settled and point the next generation of researchers towards exploring moderating conditions or theoretical extensions. You can wrap up a meta-analysis and say: this territory is mapped. Onto the next question.
 
@@ -28,6 +30,105 @@ I think I've come up with reasonable and (I hope) novel responses to these criti
 
 In a nutshell, when I do meta-analysis, I am searching for the space where a future experiment can be most useful, and in my experience, the answer is often a well-designed study aimed at rigorously assessing a subfield's most basic precepts.
 
-This is distinct, I believe, from systematic reviews in biomedical fields [@kleinstauber1996; @cumpston2019], which seem aimed mainly at telling medical doctors, publich health officials, and/or policymakers wheteher some procedure or intervention is worth doing. Another crucial difference is that such reviews are often situated as the final word on a subject,[^1] whereas I aim for my meta-analyses to just be one part of an evolving conversation, especially in light of concerns about 'temporal validity,' the idea that effects might attenuate or evolve as conditions evolve [@munger2023].
+## The two leading models of meta-analysis
 
-[^1]: For example, after two Cochrane reviews on the anti-malarial effects of insecticide-treated bed nets [@gamble2006; @lengeler2004], the lead author of one review (Lengeler) told the charity evaluator GiveWell that "there have been no more RCTs with treated nets. There is a very strong consensus that it would not be ethical to do any more. I don't think any committee in the world would grant permission to do such a trial" [@givewell2018]. Ultimately, there were three additional trials and an additional COCHRANE review [@pryce2018]
+This aim yields papers that are, I believe, distinct from the two others models of meta-analysis that I most frequently encounter. The first is systematic reviews in biomedical fields [@kleinstauber1996; @cumpston2019], which seem aimed mainly at telling medical doctors, publich health officials, and/or policymakers wheteher some procedure or intervention is worth doing. Another crucial difference is that such reviews are often situated as the final word on a subject,[^1] whereas I aim for my meta-analyses to just be one part of an evolving conversation, especially in light of concerns about 'temporal validity,' the idea that effects might attenuate or evolve as conditions evolve [@munger2023].
+
+[^1]: For example, after two Cochrane reviews on the anti-malarial effects of insecticide-treated bed nets [@gamble2006; @lengeler2004], the lead author of one review (Lengeler) told the charity evaluator GiveWell that "there have been no more RCTs with treated nets. There is a very strong consensus that it would not be ethical to do any more. I don't think any committee in the world would grant permission to do such a trial" [@givewell2018]. Ultimately, there were three additional trials and an additional COCHRANE review [@pryce2018].
+
+The second leading approach to meta-analysis is the model we observe in social psychology. At the risk of painting with too broad a brush, that genre of meta-analysis often has a valedictory, validating quality to it. Such papers are often written by a subfield's leading practitioners and function as a survey of existing work with intent to declare a subfield's central questions answered [@pettigrew2006; @bezrukova2016]. My meta-analyses, by contrast, start from the premises that most if not all basic questions in the behavioral sciences are unanswered and that most research findings are false [@ioannidis2005]. However, I also believe that the emerging field of meta-science [@ioannidis2015] and the methods of the credibility revolution [@angrist2010; @vazire2018] have given us a much better sense of what results are most likely to be unbiased estimates, and therefore to replicate successfully. Therefore, I write meta-analyses with an eye towards unearthing, and sharing with readers, the sorts of differences in study quality that illuminate which received understandings are most in need of updating, and which designs are most worth emulating and extending. Some of these tests exist within the formal framework of meta-analysis and some are supplementary, but in both cases, I hope to show how meta-analysis can become more meta-scientific: quality-attendant, skeptical but open-minded, curious and open-ended yet rigorous.
+
+### Who is this paper aimed at?
+
+This piece has three audiences in mind. The first and narrowest is 'the five critics,' the teams behind the two papers that sparked this one. Slough, Tyson, Simmons, Simonsohn and Nelson have written deep, trenchant meditations on meta-analysis and I think it behooves those of us who actually do meta-analysis to respond.
+
+The second is graduate students and early career researchers in labs who do meta-analyses, I hope this piece proves stimulating, and perhaps a departure point for articulating the epistemology underpinning your work.
+
+The third is researchers in fields where meta-analyses are uncommon but who are nonetheless "meta-curious," particularly folks who swim in the currents of the credibility revolution. If you're in this group (which might be a null set!), my hope is to persuade you that meta-analyses can be worth reading and sometimes even worth writing, especially before (or in parallel to) a new experiment.
+
+## The remainder of this paper
+
+The rest of this paper proceeds as follows. I will first articulate two basic models of meta-analysis, each of which I think is capable of producing interesting and useful papers: the "all in" approach, which seeks to distill the lessons of (more or less) an entire literature, and the "focused" approach, which subsets the literature substantially, typically on some set of criteria related to design and/or measurement strategy. I have written both types of paper, and though I prefer to work on the second for its tractability, both have value.
+
+Second, I will summarize the "comprehensive" critique from @simonsohn2022 and the "coherence" critique from @slough2023, both of which, as we will see, call the validity of the all in approach into question much more than they do the focused approach.
+
+One potential response, of course, is to ignore these criticisms. Another is to only do focused meta-analyses. The third is to offer re-interpretations and procedural modifications to the all in approach that render its estimates sensible and legible. I attempt to do this in the next section.
+
+Fourth, I conclude with meditations on unanswered questions for the models of meta-analysis that I favor, stemming from their straddling the line between deductive, hypothesis-driven and inductive, observation-driven modes of inquiry. This makes, for example, hewing closely to a pre-analysis plan challenging and potentially counter-productive. Moreover, in my experience, null and/or contradictory findings do not necessarily face adverse selection in the publication process (though they may find some journals more amenable than others).
+
+We turn now to an overview of two promising models of meta-analysis.
+
+# The all in and focused approaches to meta-analysis
+
+## All in, comprehensive assessment out
+
+# The comprehensive and coherence critiques
+
+## Comprehensive critique
+
+-   @simonsohn2022, argue that while the typical meta-analysis in social psychology aims "to be comprehensive, results-focused and transcriptive," this is "misguided, leading to uninterpretable results that misrepresent research literatures."
+
+    -   a desire for comprehensiveness typically leads the meta- analyst to average "studies of the highest quality" with "studies that lack internal validity or external validity, which are obtained using incorrect statistical techniques, or studies where results seem to arise from methodological artefacts."
+
+        -   This throw-it-all-in-the-blender approach produces results that are "virtually guaranteed to lack a meaningful interpretation" (p. 552) despite their superficial statistical precision.
+
+    -   Second, the authors encourage meta-analysts to focus on studies' designs, rather than just their results, to provide "readers with information that they can use to evaluate" (p. 552) the quality of a research literature for themselves.
+
+        -   Rather than describing every study, meta-analysts "can succinctly describe and summarize common design failures...and provide detailed descriptions only of the studies they deem most important or compelling" (p. 552)
+
+    -   Evaluate rather than transcribe, i.e., detail the evidence from the very best studies, identify common methodological shortcomings of the literature as a whole, and, finally, "discuss what open questions remain and what kinds of evidence would help answer those questions" (p. 552).
+
+```{=html}
+<!-- -->
+```
+-   @simonsohn2022 argue that researchers who "uncritically" aggregate results from all available studies, as part of an "active effort to eliminate publication bias...might instead amplify the bias from poor research design and execution" (p. XXX).
+
+-   We agree with this assessment, but would instead frame it as one of three crucial bias-variance trade-offs facing meta-analysts. By combining studies with non-comparable designs, interventions, and outcomes, researchers give readers the impression of remarkable precision (re: reduced variance) but at the expense of introducing non-statistical sources of uncertainty (re: bias) on all three fronts.
+
+## Coherence critique
+
+-   @slough2023 "highlight the dangers of conflating conceptual differences across studies with statistical sources of variation" (p. 29). They argue that for studies to have target equivalence (the property of identifying "the same estimand" (p. 1)), they must have fundamentally *harmonized* contrasts and measurement strategies: the "substantive comparison across studies is the same" and "the outcome of interest is the same and it is measured in the same way" (p. 2).
+
+-   Absent these conditions, meta-analytic results might not be "meaningful and interpretable" (p. 2). Further, target equivalence cannot be achieved "solely with statistical techniques" (p. 23); it is a property, rather, of appropriate "design or inclusion criteria" (p. 2).
+
+# Defending the all in approach 
+
+## Sensible interpretations
+
+## But why bother? Reasons to write all in papers
+
+# Conclusion
+
+-   many open questions remain.
+
+    -   lack of clarity about whether meta-analyses are, or should be, hypothesis-driven.
+
+    -   Typical checks on researcher degrees of freedom [@gelman2013; @simonsohn2014] assume a hypothesis-driven framework, and indeed, meta-analyses in the social sciences are usually aimed at validating pre-existing hypotheses.
+
+    -   Ours, however, are more exploratory: we aim for evaluation rather than validation. While we might start with some general hypotheses, these might be about a discipline rather than a literature. For example, our prior is that a social psychology literature from the 2000s is likely to show evidence of selection pressures for statistical significance. However, we also develop many of our most important questions after reading papers, which, in the context of writing a meta-analysis, means after data collection has begun. In other words, our meta-analyses are both inductive and deductive inquiries. We are left with a conundrum: we wish to "tie our hands to the mast" [@elster1977], e.g. by writing detailed pre-analysis plans and sticking to them, while also acknowledging that the most incisive questions often emerge after reading and coding studies, i.e. after data collection has begun.
+
+-   Further, meta-analyses that are written before data collection are at risk of going off track by proceeding from false premises. Consider a mistake we made while composing the pre-analysis plan for @porat2024. Because we are accustomed to social psychology literatures, we registered the analysis that we would evaluate "the overall effect size of behavioral outcomes for all of the studies in the dataset, both in the short- and in the long-term." The idea was to measure if effects of interventions attenuate over time, which is a serious concern in psychology. However, while some behavioral outcomes in the sexual violence literature are measured immediately (e.g. whether someone volunteers for a campus rape education organization [@gillies1997]), most behavioral outcomes need time to accumulate. The Sexual Experiences Survey (SES) measures incidents of sexual violence in a given time period, and an SES administered at the end of a semester is essentially guaranteed to have more incidents than one given immediately after an intervention concludes. This only became clear to us after we began reading papers (though someone with better foresight could have anticipated the issue).
+
+    -   The way we resolved this was to make sure that we included, either in the paper or in an appendix, every single pre-registered analysis, even when they were not especially informative, and to explain the above issue in our appendix. Moving forward, we aim to have pre-specified analysis code run on simulated data [@broockman2016; @blair2019] and to devote more time to anticipating such issues.
+
+-   Second, we sometimes encounter indirect signals of study quality in the literature that are difficult to integrate into formal inclusion and exclusion criteria. Should we exclude a study because it has an implausibly *large* effect size, e.g. a t-test value of 36? (One study in the prejudice reduction literature did.) What about errors in the text, or obvious discrepancies between results reported in the text and those in a table? What about a lack of transparent reporting that leads to our spending substantial time guessing a study's true effects? Each of these is information about a study's true quality; as @simonsohn2022 argue, excluding these studies would be the same "kind of meritocratic screening of research" that we "engage in when performing virtually every other task in [our] professional research lives."
+
+-   Conversely, we might notice that a paper pays special attention to computational reproducibility, or was published in a journal where reproducibility checks are part of the publication process [@lowe2021]; this is also a signal of study quality in the opposite direction. Some of these data points are easy to code, e.g. data availability, and can be included in our meta-analyses; but some are not, e.g. a the sensibility of a paper's statistical approaches.
+
+-   There are clearly no easy answers to this problem, and different lab groups should come up with their own SOPs.[^2]
+
+-   Last, there is a great deal of subjectivity in figuring out what outcomes to code. For @porat2024, we found relative homogeneity of dependent variables, but not so for @paluck2019 or @paluck2021. In the end,this has always been a judgment call, but as we continue writing meta-analyses, we hope to develop principled, general guidelines for this kind of analytic choice.
+
+-   These open questions notwithstanding, we think meta-analyses can be useful, informative, and a pleasure to write and read. We hope to see them become a standard part of the meta-scientist's toolkit, and likewise for all meta-analyses to become more meta-scientific.
+
+[^2]: Over the course of many papers with Betsy Levy Paluck and co-authors, we've come up with the following:
+
+    -   cluster RCTs with fewer than 10 clusters in total are so underpowered that they are effectively quasi-experiments, and we coded them as such in @porat2024.
+
+    -   we do not code studies where we need to eyeball a figure to assess effect sizes: researchers should not make us guess.
+
+    -   we do not convert "the results were significant" or simply "p \< .05" into quantitative estimates. However, if authors tell us that a result was "null" or "not significant" but say anything more, we set the result to be 0.01.
+
+    These rules are not perfect, but ultimately, we need policies that balance type I errors (including studies we should exclude) and type II errors (excluding studies we should include). Like research itself, we suspect that this task is not perfectible.
+
+# References

@@ -17,14 +17,11 @@
 
 \author{
     Seth Green
-    \thanks{Use footnote for providing further information about author
-(webpage, alternative address)---\emph{not} for acknowledging funding
-agencies. Optional.}
    \\
     Kahneman-Treisman Center \\
     Princeeton University \\
    \\
-  \texttt{\href{mailto:setgree@gmail.com}{\nolinkurl{setgree@gmail.com}}} \\
+  \texttt{\href{mailto:sag2212@columbia.edu}{\nolinkurl{sag2212@columbia.edu}}} \\
   }
 
 
@@ -33,15 +30,68 @@ agencies. Optional.}
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 
+% Pandoc citation processing
+%From Pandoc 3.1.8
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \begin{document}
 \maketitle
 
 
 \begin{abstract}
-This article provides a personal epistemology of meta-analysis, an
-article-length answer to the question of what are we doing when we do
-meta-analysis
+I answer two questions: what are we doing when we do meta-analysis, and
+what do meta-analytic estimates signify? I first define two models of
+meta-analysis that I find informative, which I call the ``all in'' and
+``focused'' models depending on how comprehensively a paper searches for
+and analyzes heterogeneous designs, interventions, and dependent
+variables. I then summarize two recent critiques: the ``comprehensive''
+critique from Simonsohn, Simmons, and Nelson (2022) -- that
+meta-analyses which aim to assess all possible evidence are purposefully
+eliding meaningful quality differences and therefore producing estimates
+that are less informative than those we glean from a literature's best
+papers -- and the ``coherence'' critique from Slough and Tyson (2023) --
+that for meta-analytic estimates to mean anything at all, the assemebled
+interventions need to be testing the same ideas and the assembled
+dependent variables need to be measuring the true quantity of interest
+in the same way. Next, I offer some possible defenses for the ``all in''
+model of meta-analysis from these critiques revolving around careful,
+humble interpretation of parameters. I conclude with some open questions
+for meta-analysis stemming from the method's straddling the line between
+deductive, hypothesis-driven and inductive, observation-driven modes of
+inquiry, which makes, for example, hewing to a pre-analysis plan very
+challenging.
 \end{abstract}
 
 \keywords{
@@ -52,8 +102,524 @@ meta-analysis
 
 \section{Introduction}\label{introduction}
 
-What purposes do meta-analyses serve above and beyond those accomplished
-by systematic reviews?
+\subsection{What are we doing when we do
+meta-analyses?}\label{what-are-we-doing-when-we-do-meta-analyses}
+
+What are meta-analyses for, and what does a ``meta-analytic estimate''
+actually mean? I have now contributed to four meta-analyses, and I've
+come to think that these questions are under-theorized by those of us
+who try our hand at it. Part of the problem is that the surface purpose
+and meaning of meta-analysis have a kind of pacifying effect to them:
+amalgamating results from many studies produces unified estimates that
+are more precise, and more externally valid, than any individual paper
+could hope to produce. Empirical research is inevitably messy and noisy,
+but a meta-analysis abstracts that all away and says: the answer, the
+true population-level parameter, is d = (whatever).
+
+There is an intuitive logic here. If a study with one set of
+characteristics (e.g.~perfect randomization and a small sample size)
+finds roughly the same effects as one with a totally different set
+(e.g.~large samples and perfect treatment compliance but a dependent
+variable with an unknown relationship to the true quantity of interest),
+that lends credence to the idea that whatever effect you observe really
+is the true parameter, and not an artifact of an idiosyncratic feature
+of a particular study. If you \emph{do} find systematic differences in
+your data, for instance, that one theoretical approach consistently
+outperforms another or that treatment is most effective in some setting,
+then that becomes your headline finding. If your evidence is strong
+enough, you can declare the paper's central questions effectively
+settled and point the next generation of researchers towards exploring
+moderating conditions or theoretical extensions. You can wrap up a
+meta-analysis and say: this territory is mapped. Onto the next question.
+
+But lately I've begun to have doubts about this model of inquiry. They
+began germinating while I was working on meta-analytic papers last year,
+but really came to fruition when I read two recent, excellent, and
+critical papers about meta-analysis: Slough and Tyson (2023) and
+Simonsohn, Simmons, and Nelson (2022). Not every criticism registered,
+but the two that did --- which I 'll call the ``comprehensive'' and
+``coherence'' critiques --- get to the heart of the enterprise, and to
+papers I've contributed to. They left me wondering if the meta-analytic
+estimates I've produced are ``not even wrong'' (Scheel 2022) in the
+sense of not being meaningful at all.
+
+I think I've come up with reasonable and (I hope) novel responses to
+these critiques. Thinking them through turned out to be a fine jumping
+off point for articulating a ``personal epistemology'' of meta-analysis.
+What I think I'm doing when I do meta-analysis. This paper is an attempt
+to make something at least somewhat broadly applicable out of that.
+
+In a nutshell, when I do meta-analysis, I am searching for the space
+where a future experiment can be most useful, and in my experience, the
+answer is often a well-designed study aimed at rigorously assessing a
+subfield's most basic precepts.
+
+\subsection{The two leading models of
+meta-analysis}\label{the-two-leading-models-of-meta-analysis}
+
+This aim yields papers that are, I believe, distinct from the two others
+models of meta-analysis that I most frequently encounter. The first is
+systematic reviews in biomedical fields (Kleinstäuber et al. 1996;
+Cumpston et al. 2019), which seem aimed mainly at telling medical
+doctors, publich health officials, and/or policymakers wheteher some
+procedure or intervention is worth doing. Another crucial difference is
+that such reviews are often situated as the final word on a
+subject,\footnote{For example, after two Cochrane reviews on the
+  anti-malarial effects of insecticide-treated bed nets (Gamble, Ekwaru,
+  and Kuile 2006; Lengeler 2004), the lead author of one review
+  (Lengeler) told the charity evaluator GiveWell that ``there have been
+  no more RCTs with treated nets. There is a very strong consensus that
+  it would not be ethical to do any more. I don't think any committee in
+  the world would grant permission to do such a trial'' (GiveWell 2018).
+  Ultimately, there were three additional trials and an additional
+  COCHRANE review (Pryce, Richardson, and Lengeler 2018).} whereas I aim
+for my meta-analyses to just be one part of an evolving conversation,
+especially in light of concerns about `temporal validity,' the idea that
+effects might attenuate or evolve as conditions evolve (Munger 2023).
+
+The second leading approach to meta-analysis is the model we observe in
+social psychology. At the risk of painting with too broad a brush, that
+genre of meta-analysis often has a valedictory, validating quality to
+it. Such papers are often written by a subfield's leading practitioners
+and function as a survey of existing work with intent to declare a
+subfield's central questions answered (Pettigrew and Tropp 2006;
+Bezrukova et al. 2016). My meta-analyses, by contrast, start from the
+premises that most if not all basic questions in the behavioral sciences
+are unanswered and that most research findings are false (Ioannidis
+2005). However, I also believe that the emerging field of meta-science
+(Ioannidis et al. 2015) and the methods of the credibility revolution
+(Angrist and Pischke 2010; Vazire 2018) have given us a much better
+sense of what results are most likely to be unbiased estimates, and
+therefore to replicate successfully. Therefore, I write meta-analyses
+with an eye towards unearthing, and sharing with readers, the sorts of
+differences in study quality that illuminate which received
+understandings are most in need of updating, and which designs are most
+worth emulating and extending. Some of these tests exist within the
+formal framework of meta-analysis and some are supplementary, but in
+both cases, I hope to show how meta-analysis can become more
+meta-scientific: quality-attendant, skeptical but open-minded, curious
+and open-ended yet rigorous.
+
+\subsubsection{Who is this paper aimed
+at?}\label{who-is-this-paper-aimed-at}
+
+This piece has three audiences in mind. The first and narrowest is `the
+five critics,' the teams behind the two papers that sparked this one.
+Slough, Tyson, Simmons, Simonsohn and Nelson have written deep,
+trenchant meditations on meta-analysis and I think it behooves those of
+us who actually do meta-analysis to respond.
+
+The second is graduate students and early career researchers in labs who
+do meta-analyses, I hope this piece proves stimulating, and perhaps a
+departure point for articulating the epistemology underpinning your
+work.
+
+The third is researchers in fields where meta-analyses are uncommon but
+who are nonetheless ``meta-curious,'' particularly folks who swim in the
+currents of the credibility revolution. If you're in this group (which
+might be a null set!), my hope is to persuade you that meta-analyses can
+be worth reading and sometimes even worth writing, especially before (or
+in parallel to) a new experiment.
+
+\subsection{The remainder of this
+paper}\label{the-remainder-of-this-paper}
+
+The rest of this paper proceeds as follows. I will first articulate two
+basic models of meta-analysis, each of which I think is capable of
+producing interesting and useful papers: the ``all in'' approach, which
+seeks to distill the lessons of (more or less) an entire literature, and
+the ``focused'' approach, which subsets the literature substantially,
+typically on some set of criteria related to design and/or measurement
+strategy. I have written both types of paper, and though I prefer to
+work on the second for its tractability, both have value.
+
+Second, I will summarize the ``comprehensive'' critique from Simonsohn,
+Simmons, and Nelson (2022) and the ``coherence'' critique from Slough
+and Tyson (2023), both of which, as we will see, call the validity of
+the all in approach into question much more than they do the focused
+approach.
+
+One potential response, of course, is to ignore these criticisms.
+Another is to only do focused meta-analyses. The third is to offer
+re-interpretations and procedural modifications to the all in approach
+that render its estimates sensible and legible. I attempt to do this in
+the next section.
+
+Fourth, I conclude with meditations on unanswered questions for the
+models of meta-analysis that I favor, stemming from their straddling the
+line between deductive, hypothesis-driven and inductive,
+observation-driven modes of inquiry. This makes, for example, hewing
+closely to a pre-analysis plan challenging and potentially
+counter-productive. Moreover, in my experience, null and/or
+contradictory findings do not necessarily face adverse selection in the
+publication process (though they may find some journals more amenable
+than others).
+
+We turn now to an overview of two promising models of meta-analysis.
+
+\section{The all in and focused approaches to
+meta-analysis}\label{the-all-in-and-focused-approaches-to-meta-analysis}
+
+\subsection{All in, comprehensive assessment
+out}\label{all-in-comprehensive-assessment-out}
+
+\section{The comprehensive and coherence
+critiques}\label{the-comprehensive-and-coherence-critiques}
+
+\subsection{Comprehensive critique}\label{comprehensive-critique}
+
+\begin{itemize}
+\item
+  Simonsohn, Simmons, and Nelson (2022), argue that while the typical
+  meta-analysis in social psychology aims ``to be comprehensive,
+  results-focused and transcriptive,'' this is ``misguided, leading to
+  uninterpretable results that misrepresent research literatures.''
+
+  \begin{itemize}
+  \item
+    a desire for comprehensiveness typically leads the meta- analyst to
+    average ``studies of the highest quality'' with ``studies that lack
+    internal validity or external validity, which are obtained using
+    incorrect statistical techniques, or studies where results seem to
+    arise from methodological artefacts.''
+
+    \begin{itemize}
+    \tightlist
+    \item
+      This throw-it-all-in-the-blender approach produces results that
+      are ``virtually guaranteed to lack a meaningful interpretation''
+      (p.~552) despite their superficial statistical precision.
+    \end{itemize}
+  \item
+    Second, the authors encourage meta-analysts to focus on studies'
+    designs, rather than just their results, to provide ``readers with
+    information that they can use to evaluate'' (p.~552) the quality of
+    a research literature for themselves.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Rather than describing every study, meta-analysts ``can succinctly
+      describe and summarize common design failures\ldots and provide
+      detailed descriptions only of the studies they deem most important
+      or compelling'' (p.~552)
+    \end{itemize}
+  \item
+    Evaluate rather than transcribe, i.e., detail the evidence from the
+    very best studies, identify common methodological shortcomings of
+    the literature as a whole, and, finally, ``discuss what open
+    questions remain and what kinds of evidence would help answer those
+    questions'' (p.~552).
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item
+  Simonsohn, Simmons, and Nelson (2022) argue that researchers who
+  ``uncritically'' aggregate results from all available studies, as part
+  of an ``active effort to eliminate publication bias\ldots might
+  instead amplify the bias from poor research design and execution''
+  (p.~XXX).
+\item
+  We agree with this assessment, but would instead frame it as one of
+  three crucial bias-variance trade-offs facing meta-analysts. By
+  combining studies with non-comparable designs, interventions, and
+  outcomes, researchers give readers the impression of remarkable
+  precision (re: reduced variance) but at the expense of introducing
+  non-statistical sources of uncertainty (re: bias) on all three fronts.
+\end{itemize}
+
+\subsection{Coherence critique}\label{coherence-critique}
+
+\begin{itemize}
+\item
+  Slough and Tyson (2023) ``highlight the dangers of conflating
+  conceptual differences across studies with statistical sources of
+  variation'' (p.~29). They argue that for studies to have target
+  equivalence (the property of identifying ``the same estimand''
+  (p.~1)), they must have fundamentally \emph{harmonized} contrasts and
+  measurement strategies: the ``substantive comparison across studies is
+  the same'' and ``the outcome of interest is the same and it is
+  measured in the same way'' (p.~2).
+\item
+  Absent these conditions, meta-analytic results might not be
+  ``meaningful and interpretable'' (p.~2). Further, target equivalence
+  cannot be achieved ``solely with statistical techniques'' (p.~23); it
+  is a property, rather, of appropriate ``design or inclusion criteria''
+  (p.~2).
+\end{itemize}
+
+\section{Defending the all in
+approach}\label{defending-the-all-in-approach}
+
+\subsection{Sensible interpretations}\label{sensible-interpretations}
+
+\subsection{But why bother? Reasons to write all in
+papers}\label{but-why-bother-reasons-to-write-all-in-papers}
+
+\section{Conclusion}\label{conclusion}
+
+\begin{itemize}
+\item
+  many open questions remain.
+
+  \begin{itemize}
+  \item
+    lack of clarity about whether meta-analyses are, or should be,
+    hypothesis-driven.
+  \item
+    Typical checks on researcher degrees of freedom (Gelman and Loken
+    2013; Simonsohn, Nelson, and Simmons 2014) assume a
+    hypothesis-driven framework, and indeed, meta-analyses in the social
+    sciences are usually aimed at validating pre-existing hypotheses.
+  \item
+    Ours, however, are more exploratory: we aim for evaluation rather
+    than validation. While we might start with some general hypotheses,
+    these might be about a discipline rather than a literature. For
+    example, our prior is that a social psychology literature from the
+    2000s is likely to show evidence of selection pressures for
+    statistical significance. However, we also develop many of our most
+    important questions after reading papers, which, in the context of
+    writing a meta-analysis, means after data collection has begun. In
+    other words, our meta-analyses are both inductive and deductive
+    inquiries. We are left with a conundrum: we wish to ``tie our hands
+    to the mast'' (Elster 1977), e.g.~by writing detailed pre-analysis
+    plans and sticking to them, while also acknowledging that the most
+    incisive questions often emerge after reading and coding studies,
+    i.e.~after data collection has begun.
+  \end{itemize}
+\item
+  Further, meta-analyses that are written before data collection are at
+  risk of going off track by proceeding from false premises. Consider a
+  mistake we made while composing the pre-analysis plan for Porat et al.
+  (2024). Because we are accustomed to social psychology literatures, we
+  registered the analysis that we would evaluate ``the overall effect
+  size of behavioral outcomes for all of the studies in the dataset,
+  both in the short- and in the long-term.'' The idea was to measure if
+  effects of interventions attenuate over time, which is a serious
+  concern in psychology. However, while some behavioral outcomes in the
+  sexual violence literature are measured immediately (e.g.~whether
+  someone volunteers for a campus rape education organization (Gillies
+  1997)), most behavioral outcomes need time to accumulate. The Sexual
+  Experiences Survey (SES) measures incidents of sexual violence in a
+  given time period, and an SES administered at the end of a semester is
+  essentially guaranteed to have more incidents than one given
+  immediately after an intervention concludes. This only became clear to
+  us after we began reading papers (though someone with better foresight
+  could have anticipated the issue).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The way we resolved this was to make sure that we included, either
+    in the paper or in an appendix, every single pre-registered
+    analysis, even when they were not especially informative, and to
+    explain the above issue in our appendix. Moving forward, we aim to
+    have pre-specified analysis code run on simulated data (Broockman
+    and Kalla 2016; Blair et al. 2019) and to devote more time to
+    anticipating such issues.
+  \end{itemize}
+\item
+  Second, we sometimes encounter indirect signals of study quality in
+  the literature that are difficult to integrate into formal inclusion
+  and exclusion criteria. Should we exclude a study because it has an
+  implausibly \emph{large} effect size, e.g.~a t-test value of 36? (One
+  study in the prejudice reduction literature did.) What about errors in
+  the text, or obvious discrepancies between results reported in the
+  text and those in a table? What about a lack of transparent reporting
+  that leads to our spending substantial time guessing a study's true
+  effects? Each of these is information about a study's true quality; as
+  Simonsohn, Simmons, and Nelson (2022) argue, excluding these studies
+  would be the same ``kind of meritocratic screening of research'' that
+  we ``engage in when performing virtually every other task in {[}our{]}
+  professional research lives.''
+\item
+  Conversely, we might notice that a paper pays special attention to
+  computational reproducibility, or was published in a journal where
+  reproducibility checks are part of the publication process (Lowe
+  2021); this is also a signal of study quality in the opposite
+  direction. Some of these data points are easy to code, e.g.~data
+  availability, and can be included in our meta-analyses; but some are
+  not, e.g.~a the sensibility of a paper's statistical approaches.
+\item
+  There are clearly no easy answers to this problem, and different lab
+  groups should come up with their own SOPs.\footnote{Over the course of
+    many papers with Betsy Levy Paluck and co-authors, we've come up
+    with the following:
+
+    \begin{itemize}
+    \item
+      cluster RCTs with fewer than 10 clusters in total are so
+      underpowered that they are effectively quasi-experiments, and we
+      coded them as such in Porat et al. (2024).
+    \item
+      we do not code studies where we need to eyeball a figure to assess
+      effect sizes: researchers should not make us guess.
+    \item
+      we do not convert ``the results were significant'' or simply ``p
+      \textless{} .05'' into quantitative estimates. However, if authors
+      tell us that a result was ``null'' or ``not significant'' but say
+      anything more, we set the result to be 0.01.
+    \end{itemize}
+
+    These rules are not perfect, but ultimately, we need policies that
+    balance type I errors (including studies we should exclude) and type
+    II errors (excluding studies we should include). Like research
+    itself, we suspect that this task is not perfectible.}
+\item
+  Last, there is a great deal of subjectivity in figuring out what
+  outcomes to code. For Porat et al. (2024), we found relative
+  homogeneity of dependent variables, but not so for Paluck, Green, and
+  Green (2019) or Paluck et al. (2021). In the end,this has always been
+  a judgment call, but as we continue writing meta-analyses, we hope to
+  develop principled, general guidelines for this kind of analytic
+  choice.
+\item
+  These open questions notwithstanding, we think meta-analyses can be
+  useful, informative, and a pleasure to write and read. We hope to see
+  them become a standard part of the meta-scientist's toolkit, and
+  likewise for all meta-analyses to become more meta-scientific.
+\end{itemize}
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-angrist2010}
+Angrist, Joshua D, and Jörn-Steffen Pischke. 2010. {``The Credibility
+Revolution in Empirical Economics: How Better Research Design Is Taking
+the Con Out of Econometrics.''} \emph{Journal of Economic Perspectives}
+24 (2): 3--30.
+
+\bibitem[\citeproctext]{ref-bezrukova2016}
+Bezrukova, Katerina, Chester S Spell, Jamie L Perry, and Karen A Jehn.
+2016. {``A Meta-Analytical Integration of over 40 Years of Research on
+Diversity Training Evaluation.''} \emph{Psychological Bulletin} 142
+(11): 1227.
+
+\bibitem[\citeproctext]{ref-blair2019}
+Blair, Graeme, Jasper Cooper, Alexander Coppock, and Macartan Humphreys.
+2019. {``Declaring and Diagnosing Research Designs.''} \emph{American
+Political Science Review} 113 (3): 838--59.
+
+\bibitem[\citeproctext]{ref-broockman2016}
+Broockman, David, and Joshua Kalla. 2016. {``Durably Reducing
+Transphobia: A Field Experiment on Door-to-Door Canvassing.''}
+\emph{Science} 352 (6282): 220--24.
+
+\bibitem[\citeproctext]{ref-cumpston2019}
+Cumpston, Miranda, Tianjing Li, Matthew J Page, Jacqueline Chandler,
+Vivian A Welch, Julian PT Higgins, and James Thomas. 2019. {``Updated
+Guidance for Trusted Systematic Reviews: A New Edition of the Cochrane
+Handbook for Systematic Reviews of Interventions.''} \emph{The Cochrane
+Database of Systematic Reviews} 2019 (10).
+
+\bibitem[\citeproctext]{ref-elster1977}
+Elster, Jon. 1977. {``Ulysses and the Sirens: A Theory of Imperfect
+Rationality.''} \emph{Social Science Information} 16 (5): 469--526.
+
+\bibitem[\citeproctext]{ref-gamble2006}
+Gamble, Carrol L, John Paul Ekwaru, and Feiko O ter Kuile. 2006.
+{``Insecticide-Treated Nets for Preventing Malaria in Pregnancy.''}
+\emph{Cochrane Database of Systematic Reviews}, no. 2.
+
+\bibitem[\citeproctext]{ref-gelman2013}
+Gelman, Andrew, and Eric Loken. 2013. {``The Garden of Forking Paths:
+Why Multiple Comparisons Can Be a Problem, Even When There Is No
+{`Fishing Expedition'} or {`p-Hacking'} and the Research Hypothesis Was
+Posited Ahead of Time.''} \emph{Department of Statistics, Columbia
+University} 348: 1--17.
+
+\bibitem[\citeproctext]{ref-gillies1997}
+Gillies, Ralph Anton. 1997. \emph{Providing Direct Counter-Arguments to
+Challenge Male Audiences' Attitudes Toward Rape}. University of
+Missouri-Columbia.
+
+\bibitem[\citeproctext]{ref-givewell2018}
+GiveWell. 2018. {``Mass Distribution of Long-Lasting Insecticide-Treated
+Nets (LLINs) - March 2018 Version.''} GiveWell.
+\url{https://www.givewell.org/international/technical/programs/insecticide-treated-nets/March-2018-version}.
+
+\bibitem[\citeproctext]{ref-ioannidis2005}
+Ioannidis, John PA. 2005. {``Why Most Published Research Findings Are
+False.''} \emph{PLoS Medicine} 2 (8): e124.
+
+\bibitem[\citeproctext]{ref-ioannidis2015}
+Ioannidis, John PA, Daniele Fanelli, Debbie Drake Dunne, and Steven N
+Goodman. 2015. {``Meta-Research: Evaluation and Improvement of Research
+Methods and Practices.''} \emph{PLoS Biology} 13 (10): e1002264.
+
+\bibitem[\citeproctext]{ref-kleinstauber1996}
+Kleinstäuber, Maria, Michael Witthöft, Andrés Steffanowski, Harm Van
+Marwijk, Wolfgang Hiller, and Michael J Lambert. 1996. {``Cochrane
+Database of Systematic Reviews.''}
+
+\bibitem[\citeproctext]{ref-lengeler2004}
+Lengeler, Christian. 2004. {``Insecticide-Treated Bed Nets and Curtains
+for Preventing Malaria.''} \emph{Cochrane Database of Systematic
+Reviews}, no. 2.
+
+\bibitem[\citeproctext]{ref-lowe2021}
+Lowe, Matt. 2021. {``Types of Contact: A Field Experiment on
+Collaborative and Adversarial Caste Integration.''} \emph{American
+Economic Review} 111 (6): 1807--44.
+
+\bibitem[\citeproctext]{ref-munger2023}
+Munger, Kevin. 2023. {``Temporal Validity as Meta-Science.''}
+\emph{Research \& Politics} 10 (3): 20531680231187271.
+
+\bibitem[\citeproctext]{ref-paluck2019}
+Paluck, Elizabeth Levy, Seth A Green, and Donald P Green. 2019. {``The
+Contact Hypothesis Re-Evaluated.''} \emph{Behavioural Public Policy} 3
+(2): 129--58.
+
+\bibitem[\citeproctext]{ref-paluck2021}
+Paluck, Elizabeth Levy, Roni Porat, Chelsey S Clark, and Donald P Green.
+2021. {``Prejudice Reduction: Progress and Challenges.''} \emph{Annual
+Review of Psychology} 72: 533--60.
+
+\bibitem[\citeproctext]{ref-pettigrew2006}
+Pettigrew, Thomas F, and Linda R Tropp. 2006. {``A Meta-Analytic Test of
+Intergroup Contact Theory.''} \emph{Journal of Personality and Social
+Psychology} 90 (5): 751.
+
+\bibitem[\citeproctext]{ref-porat2024}
+Porat, Roni, Ana Gantman, Elizabeth Levy Paluck, Seth A. Green, and
+John-Henry Pezzuto. 2024. {``Preventing Sexual Violence -- a Behavioral
+Problem Without a Behaviorally-Informed Solution.''} \emph{Psychological
+Science in the Public Interest} 25 (1): 1--30.
+
+\bibitem[\citeproctext]{ref-pryce2018}
+Pryce, Joseph, Marty Richardson, and Christian Lengeler. 2018.
+{``Insecticide-Treated Nets for Preventing Malaria.''} \emph{Cochrane
+Database of Systematic Reviews}, no. 11.
+
+\bibitem[\citeproctext]{ref-scheel2022}
+Scheel, Anne M. 2022. {``Why Most Psychological Research Findings Are
+Not Even Wrong.''} \emph{Infant and Child Development} 31 (1): e2295.
+
+\bibitem[\citeproctext]{ref-simonsohn2014}
+Simonsohn, Uri, Leif D Nelson, and Joseph P Simmons. 2014. {``P-Curve: A
+Key to the File-Drawer.''} \emph{Journal of Experimental Psychology:
+General} 143 (2): 534.
+
+\bibitem[\citeproctext]{ref-simonsohn2022}
+Simonsohn, Uri, Joseph Simmons, and Leif D Nelson. 2022. {``Above
+Averaging in Literature Reviews.''} \emph{Nature Reviews Psychology} 1
+(10): 551--52.
+
+\bibitem[\citeproctext]{ref-slough2023}
+Slough, Tara, and Scott A Tyson. 2023. {``External Validity and
+Meta-Analysis.''} \emph{American Journal of Political Science} 67 (2):
+440--55.
+
+\bibitem[\citeproctext]{ref-vazire2018}
+Vazire, Simine. 2018. {``Implications of the Credibility Revolution for
+Productivity, Creativity, and Progress.''} \emph{Perspectives on
+Psychological Science} 13 (4): 411--17.
+
+\end{CSLReferences}
 
 \bibliographystyle{unsrt}
 \bibliography{apoem-refs.bib}
